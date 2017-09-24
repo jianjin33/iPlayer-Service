@@ -35,5 +35,14 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
+  <listener>
+    <description>启动spring容器</description>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring-context.xml</param-value>
+  </context-param>
+
 </web-app>
         
