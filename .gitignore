@@ -3,7 +3,8 @@
 # IntelliJ project files
 .idea
 *.iml
-/.idea
+/.idea/
 out
 gen
-target/
+/.idea/workspace.xml
+/.idea/libraries
