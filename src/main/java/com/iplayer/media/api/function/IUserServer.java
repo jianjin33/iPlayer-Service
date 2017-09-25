@@ -10,4 +10,5 @@ import java.util.Objects;
 public interface IUserServer {
     Map login(String account,String password);
 
+    Map register(String account, String password, String code) throws Exception;
 }

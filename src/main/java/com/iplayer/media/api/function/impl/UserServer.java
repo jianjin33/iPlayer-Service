@@ -24,6 +24,14 @@ public class UserServer implements IUserServer {
     @Autowired
     LoginDao mLoginDao;
 
+    /**
+     * 用户登录操作
+     *
+     * @param account
+     * @param password
+     * @return
+     */
+
     @Override
     public Map<String, Object> login(String account, String password) {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -47,5 +55,33 @@ public class UserServer implements IUserServer {
         }
 
         return ReturnUtils.returnMess(Constants.RESULT_CODE_LOGIN_ERROR);
+    }
+
+
+    /**
+     * 用户注册
+     *
+     * @param account
+     * @param password
+     * @param code 验证码
+     * @return
+     */
+    @Override
+    public Map register(String account, String password, String code) throws Exception {
+
+        if ($(account) || $(password))
+            return ReturnUtils.returnMess(Constants.RESULT_CODE_NOT_REGISTER_ERROR);
+
+        UserBean userBean = mLoginDao.select("account", account);
+        if (userBean != null && Utils.isEquals(account, userBean.getAccount()))
+            return ReturnUtils.returnMess(Constants.RESULT_CODE_REGISTER_ERROR);
+
+        UserBean bean = new UserBean();
+        bean.setAccount(account);
+        bean.setPassword(password);
+        bean.setVip("N");
+
+        mLoginDao.insert(bean);
+        return ReturnUtils.returnMess(Constants.RESULT_CODE_SUCCESS);
     }
 }

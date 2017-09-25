@@ -40,13 +40,19 @@ public class LoginHandler {
         return ReturnUtils.returnMess(Constants.RESULT_CODE_LOGIN_ERROR);
     }
 
+    @ResponseBody
     @RequestMapping(value = "register")
     public Map<String,Object> register(HttpServletRequest httpServletRequest){
         String account = httpServletRequest.getParameter("account");
         String password = httpServletRequest.getParameter("password");
-
-        System.out.println("account:" + account + ";password:" + password);
-        return null;
+        String code = httpServletRequest.getParameter("code");
+        try {
+            Map map =  userServer.register(account,password,code);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ReturnUtils.returnMess(Constants.RESULT_CODE_NOT_REGISTER_ERROR);
     }
 
 
