@@ -1,6 +1,8 @@
 package com.iplayer.media.api.controller;
 
 import com.iplayer.media.api.function.IUserServer;
+import com.iplayer.media.core.Constants;
+import com.iplayer.media.util.ReturnUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,9 @@ public class LoginHandler {
 
     @ResponseBody
     @RequestMapping(value = "login")
-    public Map<String, Object> login(String account, String password, HttpServletRequest httpRequest) {
+    public Map<String, Object> login(HttpServletRequest httpRequest) {
+        String account = httpRequest.getParameter("account");
+        String password = httpRequest.getParameter("password");
         System.out.println("account:" + account + ";password:" + password);
         try {
             Map map = userServer.login(account, password);
@@ -33,6 +37,17 @@ public class LoginHandler {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return ReturnUtils.returnMess(Constants.RESULT_CODE_LOGIN_ERROR);
+    }
+
+    @RequestMapping(value = "register")
+    public Map<String,Object> register(HttpServletRequest httpServletRequest){
+        String account = httpServletRequest.getParameter("account");
+        String password = httpServletRequest.getParameter("password");
+
+        System.out.println("account:" + account + ";password:" + password);
         return null;
     }
+
+
 }

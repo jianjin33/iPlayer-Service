@@ -3,12 +3,16 @@ package com.iplayer.media.api.function.impl;
 import com.iplayer.media.api.dao.LoginDao;
 import com.iplayer.media.api.entity.UserBean;
 import com.iplayer.media.api.function.IUserServer;
+import com.iplayer.media.core.Constants;
+import com.iplayer.media.util.ReturnUtils;
+import com.iplayer.media.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.iplayer.media.util.Utils.$;
 
 /**
  * Created by jianzuming on 17/9/24.
@@ -20,40 +24,28 @@ public class UserServer implements IUserServer {
     @Autowired
     LoginDao mLoginDao;
 
-    /**
-     * 接口调用返回编码
-     */
-    private static final String returnCode = "code";
-    /**
-     * 接口调用返回信息描述
-     */
-    private static final String returnMessage = "message";
-
     @Override
-    public Map login(String account, String password) {
-        Map<String,Object> data =new HashMap<String,Object>();
-        if ("".equals(account) || "".equals(password))
-            return (Map) data.put(returnMessage,"用户名或密码为空");
-
+    public Map<String, Object> login(String account, String password) {
+        Map<String, Object> data = new HashMap<String, Object>();
+        if ($(account) || $(password))
+            return ReturnUtils.returnMess(Constants.RESULT_CODE_LOGIN_ERROR);
         try {
-            UserBean userBean = mLoginDao.select("account",account);
+            UserBean userBean = mLoginDao.select("account", account);
 
             if (userBean == null)
-                return (Map) data.put(returnMessage,"用户不存在，请检测！");
+                return ReturnUtils.returnMess(Constants.RESULT_USER_NOT_EXIST);
 
-            if (!password.equals(userBean.getPassword()))
-                return (Map) data.put(returnMessage,"用户名密码不正确，请重试！");
+            if (Utils.isNotEquals(password, userBean.getPassword()))
+                return ReturnUtils.returnMess(Constants.RESULT_CODE_LOGIN_PWD_ERROR);
 
-            data.put(returnMessage,"登录成功");
-            data.put(returnCode,"000000");
-            data.put("vip",userBean.getVip());
-            data.put("userName",userBean.getAccount());
+            data.put("vip", userBean.getVip());
+            data.put("userName", userBean.getAccount());
 
-            return data;
+            return ReturnUtils.returnMess(data);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return null;
+        return ReturnUtils.returnMess(Constants.RESULT_CODE_LOGIN_ERROR);
     }
 }

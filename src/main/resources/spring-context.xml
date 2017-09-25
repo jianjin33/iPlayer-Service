@@ -58,4 +58,24 @@
         <property name="basePackage" value="com.iplayer.media.api.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
+
+    <bean id="springBeanFactoryUtils" class="com.iplayer.media.util.SpringBeanFactoryUtils"/>
+
+    <!-- 配置国际化资源文件路径 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <!-- 定义消息资源文件的相对路径 -->
+            <value>message</value>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <!--① 刷新资源文件的周期，以秒为单位(目前默认一小时)-->
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+    <!-- 基于Cookie的本地化解析器 -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="cookieMaxAge" value="604800"/>
+        <property name="defaultLocale" value="zh_CN"/>
+        <property name="cookieName" value="Language"></property>
+    </bean>
+
 </beans>
