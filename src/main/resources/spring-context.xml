@@ -24,9 +24,16 @@
     <!--使用c3p0数据源-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/test"></property>
+
+        <!--mac本地数据库连接-->
+        <!--<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/test"></property>-->
+        <!--<property name="user" value="root"></property>-->
+        <!--<property name="password" value="19940208"></property> -->
+
+        <!--公司Window数据库连接-->
+        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/iplayer"></property>
         <property name="user" value="root"></property>
-        <property name="password" value="19940208"></property>
+        <property name="password" value="twgaqg"></property>
         <!--最小访问数量-->
         <property name="minPoolSize" value="1"></property>
         <property name="maxPoolSize" value="5"></property>

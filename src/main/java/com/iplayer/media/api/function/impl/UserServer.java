@@ -30,24 +30,24 @@ public class UserServer implements IUserServer {
     private static final String returnMessage = "message";
 
     @Override
-    public Map login(String account, String password,HttpServletRequest httpRequest) {
+    public Map login(String account, String password) {
         Map<String,Object> data =new HashMap<String,Object>();
         if ("".equals(account) || "".equals(password))
             return (Map) data.put(returnMessage,"用户名或密码为空");
 
         try {
-            UserBean userBean = mLoginDao.select("user_name",account);
+            UserBean userBean = mLoginDao.select("account",account);
 
             if (userBean == null)
                 return (Map) data.put(returnMessage,"用户不存在，请检测！");
 
-            if (!password.equals(userBean.getUser_pwd()))
+            if (!password.equals(userBean.getPassword()))
                 return (Map) data.put(returnMessage,"用户名密码不正确，请重试！");
 
             data.put(returnMessage,"登录成功");
             data.put(returnCode,"000000");
-            data.put("vip",userBean.getUser_vip());
-            data.put("userName",userBean.getUser_name());
+            data.put("vip",userBean.getVip());
+            data.put("userName",userBean.getAccount());
 
             return data;
         } catch (Exception e) {

@@ -5,9 +5,9 @@ package com.iplayer.media.api.entity;
  */
 public class UserBean {
     private int id;
-    private String user_name;
-    private String user_pwd;
-    private String user_vip;
+    private String account;
+    private String password;
+    private String vip;
 
     public int getId() {
         return id;
@@ -17,27 +17,27 @@ public class UserBean {
         this.id = id;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
-    public String getUser_pwd() {
-        return user_pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUser_pwd(String user_pwd) {
-        this.user_pwd = user_pwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getUser_vip() {
-        return user_vip;
+    public String getVip() {
+        return vip;
     }
 
-    public void setUser_vip(String user_vip) {
-        this.user_vip = user_vip;
+    public void setVip(String vip) {
+        this.vip = vip;
     }
 }

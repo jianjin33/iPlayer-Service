@@ -8,6 +8,6 @@ import java.util.Objects;
  * Created by jianzuming on 17/9/24.
  */
 public interface IUserServer {
-    Map login(String account,String password,HttpServletRequest httpRequest);
+    Map login(String account,String password);
 
 }
