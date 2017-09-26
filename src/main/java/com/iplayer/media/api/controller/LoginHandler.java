@@ -3,9 +3,11 @@ package com.iplayer.media.api.controller;
 import com.iplayer.media.api.function.IUserServer;
 import com.iplayer.media.core.Constants;
 import com.iplayer.media.util.ReturnUtils;
+import com.mysql.jdbc.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +26,7 @@ public class LoginHandler {
     IUserServer userServer;
 
     @ResponseBody
-    @RequestMapping(value = "login")
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public Map<String, Object> login(HttpServletRequest httpRequest) {
         String account = httpRequest.getParameter("account");
         String password = httpRequest.getParameter("password");
@@ -41,13 +43,13 @@ public class LoginHandler {
     }
 
     @ResponseBody
-    @RequestMapping(value = "register")
-    public Map<String,Object> register(HttpServletRequest httpServletRequest){
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public Map<String, Object> register(HttpServletRequest httpServletRequest) {
         String account = httpServletRequest.getParameter("account");
         String password = httpServletRequest.getParameter("password");
         String code = httpServletRequest.getParameter("code");
         try {
-            Map map =  userServer.register(account,password,code);
+            Map map = userServer.register(account, password, code);
             return map;
         } catch (Exception e) {
             e.printStackTrace();
