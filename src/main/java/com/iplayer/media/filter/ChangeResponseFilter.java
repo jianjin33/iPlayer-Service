@@ -17,9 +17,9 @@ public class ChangeResponseFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
         System.out.print("header值：" + ((HttpServletRequest) request).getHeader("iplayer"));
-        if ("iplayer".equals(((HttpServletRequest) request).getHeader("iplayer"))) {
+//        if ("iplayer".equals(((HttpServletRequest) request).getHeader("iplayer"))) {
             chain.doFilter(request,response);
-        }
+//        }
 
     }
 

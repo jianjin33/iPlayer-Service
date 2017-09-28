@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iplayer.media.api.dao.HomeVideoListDao">
+
+    <!-- PecooAppVersion列名与属性名映射 -->
+    <resultMap id="VideoListBean" type="com.iplayer.media.api.entity.VideoListBean">
+
+
+        <result column="video_id" property="videoId"/>
+        <result column="video_grade" property="grade"/>
+        <result column="video_name" property="name"/>
+        <result column="video_pic" property="pic"/>
+        <result column="video_describe" property="describe"/>
+        <result column="video_tag" property="tag"/>
+    </resultMap>
+
+    <!-- 根据用户名查询 -->
+    <select id="getVideoList" resultType="java.util.List"  resultMap="VideoListBean">
+        SELECT * FROM video_list
+    </select>
+
+</mapper>
