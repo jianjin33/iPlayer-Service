@@ -2,6 +2,7 @@ package com.iplayer.media.api.controller;
 
 import com.iplayer.media.api.entity.VideoListBean;
 import com.iplayer.media.api.function.IHomeVideoListServer;
+import com.iplayer.media.util.ReturnUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,16 +29,7 @@ public class HomeVideoListController {
     @ResponseBody
     @RequestMapping(value = "videoList")
     public Map getHomeVideoList(HttpServletRequest httpServletRequest) {
-        VideoListBean bean = homeVideoListServer.getHomeVideoList();
-        Map map = new HashMap();
-        if (bean != null) {
-            map.put("name", bean.getName());
-            map.put("id", bean.getVideoId());
-            map.put("detail", bean.getDescribe());
-        }
-        return map;
-
-
+        return homeVideoListServer.getHomeVideoList();
     }
 
 

@@ -5,10 +5,11 @@ import com.iplayer.media.common.AbstractDao;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/9/28.
  */
 public interface HomeVideoListDao {
-    VideoListBean getVideoList();
+    List<VideoListBean> getVideoList();
 }
